@@ -1,2 +1,52 @@
 # C-PONG
-A Simple Ping Pong game made with Raylib in C
+
+A Pong game developed using the [Raylib](https://www.raylib.com/) library. Written in C.
+
+## Key Features
+
+* **Multiplayer:** Play against a friend in 2-player mode.
+* **Singleplayer:** Challenge the AI in a Player vs CPU mode.
+* **Game History:** Track your past games with a savefile system.
+
+## Getting Started
+
+### Prerequisites
+
+* **Raylib:** Download and install the latest Raylib library from the official website: [https://www.raylib.com/](https://www.raylib.com/)
+* **C Compiler:** C compiler like GCC or Clang is needed to compile the source code.
+
+### Installation
+
+1. Clone this repository:
+
+   ```bash
+   git clone https://github.com/DeCryptAF/C-PONG.git
+   ```
+
+2. Compile the source code:
+
+   **Linux:**
+
+   ```bash
+   cd C-PONG
+   gcc -o pong main.c game.c savedata.c -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+   ```
+
+   **Windows:**
+
+   ```bash
+   cd C-PONG
+   gcc -o pong main.c game.c savedata.c -lraylib -lopengl32 -lgdi32 -lwinmm
+   ```
+   **Use Makefile:**
+   ```
+   cd C-PONG
+   make
+   ```
+4. Run the game:
+
+   ```bash
+   ./pong  // Linux
+   pong.exe  // Windows
+   ```
+
