@@ -44,3 +44,5 @@ A Pong game developed using the [Raylib](https://www.raylib.com/) library. Writt
    pong.exe  // Windows
    ```
 
+## Known issues
+- The collision of the ball and the paddle often glitches at certain angle. The observation is that the Collision system of the raylib considers all the four side of the paddle when detecting a collision with the ball. Where We only need one side of each paddle,the front side, to keep the simplicity. 
