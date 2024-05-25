@@ -26,23 +26,17 @@ A Pong game developed using the [Raylib](https://www.raylib.com/) library. Writt
 2. Compile the source code:
 
    **Linux:**
-
+   Refer to this [instruction](https://github.com/raysan5/raylib/wiki/Working-on-Windows).
    ```bash
-   cd C-PONG
-   gcc -o pong main.c game.c savedata.c -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+   gcc -o pong main.c game.c savedata.c screen.c -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
    ```
 
    **Windows:**
-
+   Refer to this [instruction](https://github.com/raysan5/raylib/wiki/Working-on-Windows).
    ```bash
-   cd C-PONG
-   gcc -o pong main.c game.c savedata.c -lraylib -lopengl32 -lgdi32 -lwinmm
+   gcc -o pong main.c game.c savedata.c screen.c -lraylib -lopengl32 -lgdi32 -lwinmm
    ```
-   **Use Makefile:**
-   ```
-   cd C-PONG
-   make
-   ```
+
 4. Run the game:
 
    ```bash
