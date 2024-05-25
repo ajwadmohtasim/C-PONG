@@ -27,7 +27,7 @@ void DrawGame(GameScreen currentState)
             DrawLine(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BLACK);
             DrawText(TextFormat("%02d", leftScore), GetScreenWidth() / 4, 50, 60, BLACK);
             DrawText(TextFormat("%02d", rightScore), (GetScreenWidth() / 4) * 3, 50, 60, BLACK);
-            DrawText(TextFormat("Speed : %01lf", ballAcceleration), GetScreenWidth() / 4, 100, 20, BLACK);
+            DrawText(TextFormat("Speed : %.3lf", ballAcceleration), GetScreenWidth() / 4, 100, 20, BLACK);
             DrawText("Player - 1", (GetScreenWidth() / 8) * 3, 60, 30, BLACK);
             DrawText("Player - 2", (GetScreenWidth() / 8) * 4.5, 60, 30, BLACK);
             break;
@@ -55,7 +55,7 @@ void DrawGame(GameScreen currentState)
             DrawLine(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT, BLACK);
             DrawText(TextFormat("%02d", leftScore), GetScreenWidth() / 4, 50, 60, BLACK);
             DrawText(TextFormat("%02d", rightScore), (GetScreenWidth() / 4) * 3, 50, 60, BLACK);
-            DrawText(TextFormat("Speed : %01lf", ballAcceleration), GetScreenWidth() / 4, 100, 20, BLACK);
+            DrawText(TextFormat("Speed : %.3lf", ballAcceleration), GetScreenWidth() / 4, 100, 20, BLACK);
             DrawText("Player - 1", (GetScreenWidth() / 8) * 3, 60, 30, BLACK);
             DrawText("CPU", (GetScreenWidth() / 8) * 4.5, 60, 30, BLACK);
             break;
