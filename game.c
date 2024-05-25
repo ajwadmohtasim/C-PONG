@@ -46,11 +46,13 @@ GameScreen GameLogic(GameScreen currentState)
                 {
                     Save(STORAGE_P1_SCORE, ++p1Score);
                     Save(STORAGE_P2_SCORE, p2Score);
+                    Save(STORAGE_CPU_SCORE, cpuScore);
                 }
                 else
                 {
                     Save(STORAGE_P1_SCORE, p1Score);
                     Save(STORAGE_P2_SCORE, ++p2Score);
+                    Save(STORAGE_CPU_SCORE, cpuScore);
                 }
 
                 // Update Scores
@@ -121,12 +123,14 @@ GameScreen GameLogic(GameScreen currentState)
                 if (winner == 1)
                 {
                     Save(STORAGE_P1_SCORE, ++p1Score);
-                    Save(STORAGE_CPU_SCORE, p2Score);
+                    Save(STORAGE_P2_SCORE, p2Score);
+                    Save(STORAGE_CPU_SCORE, cpuScore);
                 }
                 else
                 {
                     Save(STORAGE_P1_SCORE, p1Score);
-                    Save(STORAGE_CPU_SCORE, ++p2Score);
+                    Save(STORAGE_P2_SCORE, p2Score);
+                    Save(STORAGE_CPU_SCORE, ++cpuScore);
                 }
                 
                 // Update Scores
