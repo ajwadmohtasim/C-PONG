@@ -6,15 +6,6 @@
 //------------------------------------------------------------
 GameScreen GameLogic(GameScreen currentState)
 {
-
-    // Check if savefile exists, if it does not, go with initial value, else load save value
-    if (file_exists(STORAGE_DATA_FILE))
-    {
-        p1Score = Load(STORAGE_P1_SCORE);
-        p2Score = Load(STORAGE_P2_SCORE);
-        cpuScore = Load(STORAGE_CPU_SCORE);
-    }
-
     // Screen + Game Logics
     switch (currentState)
     {
@@ -46,10 +37,10 @@ GameScreen GameLogic(GameScreen currentState)
                 boxB.y += racketSpeed;
 
             // Check if won
-            if ((leftScore >= wincon) || (rightScore >= wincon))
+            if (((leftScore >= wincon) || (rightScore >= wincon)) && gamemode == Gameplay)
             {
                 winner = (leftScore > rightScore) ? 1 : 2;
-
+                
                 // Save score in savedata.data
                 if (winner == 1)
                 {
@@ -122,7 +113,7 @@ GameScreen GameLogic(GameScreen currentState)
                 boxA.y += racketSpeed;
 
             // Check if won
-            if ((leftScore >= wincon) || (rightScore >= wincon))
+            if (((leftScore >= wincon) || (rightScore >= wincon)) && gamemode == vsCPU)
             {
                 winner = (leftScore > rightScore) ? 1 : 2;
                 
@@ -182,6 +173,14 @@ void InitializeElements(void)
     // Racket Properties
     boxA = (Rectangle){50, GetScreenHeight() / 2.0f - 50, 10, 100};
     boxB = (Rectangle){GetScreenWidth() - 50 - 10, GetScreenHeight() / 2 - 50, 10, 100};
+
+    // Check if savefile exists, if not, go with default, else load save values.
+    if (file_exists(STORAGE_DATA_FILE))
+    {
+        p1Score = Load(STORAGE_P1_SCORE);
+        p2Score = Load(STORAGE_P2_SCORE);
+        cpuScore = Load(STORAGE_CPU_SCORE);
+    }
 }
 
 // Ball Movement Logic
