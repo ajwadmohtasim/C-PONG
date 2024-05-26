@@ -7,24 +7,31 @@
 //------------------------------------------------------------
 bool Save(unsigned int position, int value)
 {
+    
     bool ok = false;
-    int dataSize = 0;
-    unsigned int newDataSize = 0;
-    unsigned char *fileData = LoadFileData(STORAGE_DATA_FILE, &dataSize);
-    unsigned char *newFileData = NULL;
+    int dataSize = 0; // store size of the savefle
+    unsigned int newDataSize = 0; // store size of the new savefile if reallocation is needed
+    unsigned char *fileData = LoadFileData(STORAGE_DATA_FILE, &dataSize); //Load exisitng data from savefile
+    unsigned char *newFileData = NULL; // Pointer for new savefile after reallocation
 
+
+    // Check if savefile successfully loaded
     if (fileData != NULL)
     {
+
+        // Check if current file size is less than required position, if yes, re-allocaiton is required
         if (dataSize <= (position * sizeof(int)))
         {
-            newDataSize = (position + 1) * sizeof(int);
-            newFileData = (unsigned char *)RL_REALLOC(fileData, newDataSize);
 
+            newDataSize = (position + 1) * sizeof(int); //Calculate new data size.
+            newFileData = (unsigned char *)RL_REALLOC(fileData, newDataSize); //Reallocate memory for new savefile
+
+            // Check if it reallocation is successful
             if (newFileData != NULL)
             {
-                // RL_REALLOC succeded
+                // RL_REALLOC succeded - store data into new savefile
                 int *dataPtr = (int *)newFileData;
-                dataPtr[position] = value;
+                dataPtr[position] = value; 
             }
             else
             {
@@ -35,6 +42,7 @@ bool Save(unsigned int position, int value)
                 newDataSize = dataSize;
             }
         }
+        // Reallocation is not required
         else
         {   
             // We store the old size of the file
@@ -46,19 +54,21 @@ bool Save(unsigned int position, int value)
             dataPtr[position] = value;
         }
 
-        ok = SaveFileData(STORAGE_DATA_FILE, newFileData, newDataSize);
-        RL_FREE(newFileData);
+        ok = SaveFileData(STORAGE_DATA_FILE, newFileData, newDataSize); // save data back to the savefile
+        RL_FREE(newFileData); // Free allocated memory
         TraceLog(LOG_INFO, "FILEIO: [%s] Saved storage value: %i", STORAGE_DATA_FILE, value);
     }
+    // New savefile required
     else
     {
         TraceLog(LOG_INFO, "FILEIO: [%s] File created successfully", STORAGE_DATA_FILE);
         dataSize = (position + 1) * sizeof(int);
-        fileData = (unsigned char *)RL_MALLOC(dataSize);
+
+        fileData = (unsigned char *)RL_MALLOC(dataSize); //reallocate new file 
         int *dataPtr = (int *)fileData;
         dataPtr[position] = value;
         ok = SaveFileData(STORAGE_DATA_FILE, fileData, dataSize);
-        UnloadFileData(fileData);
+        UnloadFileData(fileData); // unload the datafile form memory
         TraceLog(LOG_INFO, "FILEIO: [%s] Saved storage value: %i", STORAGE_DATA_FILE, value);
     }
     return ok;
@@ -74,7 +84,7 @@ int Load(unsigned int position)
 
     if (fileData != NULL)
     {
-        if (dataSize < (position * 4))
+        if (dataSize < (position * 4)) // Check if our required position is out of bounds.
             TraceLog(LOG_WARNING, "FILEIO: [%s] Failed to find storage position: %i", STORAGE_DATA_FILE, position);
         else
         {
@@ -82,7 +92,7 @@ int Load(unsigned int position)
             value = dataPtr[position];
         }
 
-        UnloadFileData(fileData);
+        UnloadFileData(fileData); //unload the file data from memory
         TraceLog(LOG_INFO, "FILEIO: [%s] Loaded storage value: %i", STORAGE_DATA_FILE, value);
     }
 
