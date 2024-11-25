@@ -20,7 +20,7 @@ A Pong game developed using the [Raylib](https://www.raylib.com/) library. Writt
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/DeCryptAF/C-PONG.git
+   git clone https://github.com/DeCryptAF/C-PONG.git](https://github.com/ajwadmohtasim/C-PONG.git
    ```
 
 2. Compile the source code:
